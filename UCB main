@@ -1,0 +1,24 @@
+from ucb import multi_armed_bandit_ucb
+from matplotlib import pyplot as plt
+import numpy as np
+
+num_bandits = 10 
+num_steps = 1000
+epsilon = 0.1
+num_cases = 500
+c = 1
+
+avg_reward = np.zeros(num_steps)
+print(f'running for epsilon ucb') 
+for i in range(num_cases): 
+    reward_history = multi_armed_bandit_ucb(num_bandits, num_steps, c)
+    for j in range(num_steps): 
+        avg_reward[j]+= reward_history[j]
+
+for i in range(num_steps): 
+    avg_reward[i] /= num_cases
+
+plt.plot(avg_reward, label = f'ucb')
+
+plt.legend()
+plt.show()
