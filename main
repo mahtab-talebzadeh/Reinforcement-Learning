@@ -1,0 +1,18 @@
+import numpy as np
+from epsilon_greedy import multi_armed_bandit_epsilon_greedy
+from matplotlib import pyplot as plt
+
+num_bandits=10
+num_steps=1000
+epsilon=0.1
+num_cases=500
+avg_reward=np.zeros(num_steps)
+for i in range(num_cases):
+    reward_history=multi_armed_bandit_epsilon_greedy(num_bandits,num_steps,epsilon)
+    for j in range(num_steps):
+        avg_reward[j]+=reward_history[j]
+for i in range(num_steps):
+    avg_reward[i]/=num_cases
+plt.plot(avg_reward)
+plt.show()
+
